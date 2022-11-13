@@ -1,4 +1,4 @@
-# truffle - erc20
+# Dapp-Solidity-Web3.js-etherjs-demo
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 
 ### 1. 安装启动 ganache
