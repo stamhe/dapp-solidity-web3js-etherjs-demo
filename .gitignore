@@ -1,0 +1,15 @@
+.idea
+.phalcon
+.DS_Store
+third_part/phpQuery
+tags
+*/tags
+resource/rsyncd
+.buildpath
+.project
+.settings
+.vscode
+.composer.lock
+composer.lock
+node_modules
+build
