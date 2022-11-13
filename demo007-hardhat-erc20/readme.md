@@ -1,4 +1,4 @@
-# Dapp-Solidity-Web3.js-Ether.js-Truffle-Hardhat-demo
+# ethers.js - erc20
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 
 ### 1. 安装启动 ganache
@@ -23,104 +23,9 @@ eth private_key - 只是测试网络随机生成，测试数据用，没有实�
 
 ```
 
-### 2. web3.js 与  ethers.js 裸工程初始化
+### 2. hardhat 工程初始化
 
 ```
-web3.js
-mkdir test
-cd test
-npm init -y
-npm install web3 fs solc@0.8.17 dotenv @openzeppelin/contracts
-
-编写代码
-vim xxx.sol
-vim xxx.js
-
-node xxx.js
-
-
-
-ethers.js
-mkdir test
-cd test
-npm init -y
-npm install ethers fs solc@0.8.17 dotenv @openzeppelin/contracts
-
-编写代码
-vim xxx.sol
-vim xxx.js
-
-node xxx.js
-
-```
-
-### 3. Truffle 编译&测试&部署
-
-```
-
-配置 eth 私钥
-export ETH_PRIVATE_KEY=0x77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad
-
-# truffle 使用的 HDWalletProvider 接收的私钥要去除私钥前面的 0x 前缀
-export ETH_PRIVATE_KEY_RAW="77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad"
-
-
-npm install -g truffle
-mkdir test
-cd test
-npm init -y
-truffle init
-npm install web3 solc@0.8.17 fs dotenv @openzeppelin/contracts @truffle/hdwallet-provider
-
-编写代码
-vim xxx.sol
-vim xxx.js
-
-编译
-truffle compile --all
-测试
-truffle test --network mynetwork
-部署
-truffle migrate --network mynetwork
-
-
-
-
-truffle compile
-truffle compile --all  // 全部重新编译
-truffle migrate  // 没有指定网络，默认部署到内置的  development 网络
-truffle migrate --reset
-truffle migrate --network goerli
-truffle migrate --network mynetwork  --reset	// 强制重新部署
-
-
-运行测试用例
-truffle test
-truffle test --network mynetwork // 在指定网络测试
-
-运行 Solidity 测试用例:
-truffle test ./test/TestMetacoin.sol
-运行 JavaScript 测试用例
-truffle test ./test/metacoin.js
-
-
-进入控制台
-truffle console
-truffle console  --network mynetwork
-
-进入dashboard
-truffle dashboard	// 默认 http://127.0.0.1:24012，默认开启了一个名字叫  dashboard 的网络，也可以在这个网络部署和运行合约.
-```
-
-### 4. Hardhat 编译&测试&部署
-```
-配置 eth 私钥
-export ETH_PRIVATE_KEY=0x77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad
-
-# truffle 使用的 HDWalletProvider 接收的私钥要去除私钥前面的 0x 前缀
-export ETH_PRIVATE_KEY_RAW="77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad"
-
-
 mkdir test
 cd test
 npm init --yes
@@ -128,9 +33,34 @@ npm install ethers fs solc@0.8.17 dotenv @openzeppelin/contracts hardhat @nomicf
 
 npx hardhat  # Create a JavaScript project
 
+
+npm install @nomicfoundation/hardhat-toolbox
+Add the highlighted line to your hardhat.config.js so that it looks like this:
+
+require("@nomicfoundation/hardhat-toolbox");
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.17",
+};
+
+
+
 编写代码
 vim xxx.sol
 vim xxx.js
+
+```
+
+### 3. 编译&测试&部署
+
+```
+
+配置 eth 私钥
+export ETH_PRIVATE_KEY=0x77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad
+
+# truffle 使用的 HDWalletProvider 接收的私钥要去除私钥前面的 0x 前缀
+export ETH_PRIVATE_KEY_RAW="77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad"
+
 
 
 npx hardhat compile --force
@@ -140,6 +70,13 @@ npx hardhat run scripts/deploy.js --network myself
 如果不指定部署网络，会默认在 hardhat 内置网络内部署 (Hardhat Network)
 npx hardhat run scripts/deploy.js
 npx hardhat run scripts/deploy.js --network myself	// 指定网络
+
+
+
+
+
+
+
 
 
 
@@ -166,6 +103,6 @@ hardhat 提供了一个 console.log() 方法，可以在合约运行时打印日
 import "hardhat/console.sol";
 ```
 
-### 5. 感谢 Dapp-Learning 项目提供如此好的学习资料集合
+### 4. 感谢 Dapp-Learning 项目提供如此好的学习资料集合
 
 [Dapp-Learning](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
