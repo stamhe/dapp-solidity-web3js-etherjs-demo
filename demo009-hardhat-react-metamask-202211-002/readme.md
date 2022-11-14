@@ -105,6 +105,7 @@ npm install -g create-react-app
 cd test
 create-react-app frontend
 cd frontend
+npm install ethers
 
 A. 将步骤 3 编译得到的 artifacts 目录的 文件同步到 frontend/src 目录下
 B. 再 react 工程新建 Greeter.js 组件，引入 Greeter.sol 合约的 abi 信息
@@ -113,6 +114,95 @@ C. 编写完组件代码，启动界面
 npm start
 ```
 
-### 5. 感谢 Dapp-Learning 项目提供如此好的学习资料集合
+### 5. 跟 metamask 交互
+```
+
+安装配置 eslint 以支持 语法检查指定到 es2020 以上版本支持 BigInt
+npm i eslint eslint-plugin-react
+
+
+
+
+
+
+npm i ethereumjs-util eth-sig-util
+npm i ethereumjs-util@5.2.1 eth-sig-util@2.5.4
+How to polyfill node core modules in webpack 5
+Until the latest update to webpack version ___, webpack < 5 used to include NodeJS polyfills by default. Because the current version of webpack no longer includes NodeJS polyfills by default, it is causing issues for developers that use create-react-app with webpack > 5 to build applications with the web3.js and alchemyweb3.js library.
+
+https://stackoverflow.com/questions/70398678/i-tried-to-polyfill-modules-in-webpack-5-but-not-working-reactjs
+
+https://www.alchemy.com/blog/how-to-polyfill-node-core-modules-in-webpack-5
+
+npm install --save-dev react-app-rewired
+npm install --save-dev crypto-browserify stream-browserify assert stream-http https-browserify os-browserify url buffer process
+
+
+
+config-overrides.js
+const webpack = require('webpack'); 
+module.exports = function override(config) { 
+		const fallback = config.resolve.fallback || {}; 
+		Object.assign(fallback, { 
+    	"crypto": require.resolve("crypto-browserify"), 
+      "stream": require.resolve("stream-browserify"), 
+      "assert": require.resolve("assert"), 
+      "http": require.resolve("stream-http"), 
+      "https": require.resolve("https-browserify"), 
+      "os": require.resolve("os-browserify"), 
+      "url": require.resolve("url") 
+      }) 
+   config.resolve.fallback = fallback; 
+   config.plugins = (config.plugins || []).concat([ 
+   	new webpack.ProvidePlugin({ 
+    	process: 'process/browser', 
+      Buffer: ['buffer', 'Buffer'] 
+    }) 
+   ]) 
+   return config; }
+
+
+
+
+package.json
+"start": "react-app-rewired start", 
+  "build": "react-app-rewired build", 
+  "test": "react-app-rewired test", 
+  "eject": "react-scripts eject" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+可能的方案二:
+To use polyfill in webpack 5 in reactjs Follow the below steps:
+
+First Install npm install node-polyfill-webpack-plugin module.(reference link: https://www.npmjs.com/package/node-polyfill-webpack-plugin)
+
+Then go to follow webpack.config.js --> node-module -> react-scripts -> config -> webpack.config.js
+
+Then add below code:
+
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
+
+module.exports = {
+    // Other rules...
+    plugins: [
+        new NodePolyfillPlugin()
+    ]
+}
+
+```
+
+### 6. 感谢 Dapp-Learning 项目提供如此好的学习资料集合
 
 [Dapp-Learning](https://github.com/Dapp-Learning-DAO/Dapp-Learning)
