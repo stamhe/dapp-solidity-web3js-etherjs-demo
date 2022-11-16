@@ -1,4 +1,4 @@
-# truffle - erc20
+# ethers.js - erc20
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 
 ### 1. 安装启动 ganache
@@ -8,6 +8,7 @@ npm install -g ganache-cli ganache
 
 
 ganache --wallet.accounts 0x77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad,100000000000000000000 0x2d7ebdb29614e40846274bcb7f3a591a53472d2107c2586886e1a7f72c38235a,100000000000000000000 0x532f5aad84ac90976760037798e1469df169e856e49c6b12893008d997bc2ea0,100000000000000000000 0xbb9c5f23fd14febf9a98fd00ccf6cc18ad93b0edc439e6ab5d3184ab5bcb3572,100000000000000000000  --server.ws true  --database.dbPath /data/tmp/ganache --wallet.accountKeysPath /data/tmp/ganache-privatekey.json  --wallet.defaultBalance 1000 --wallet.passphrase ""  --chain.chainId 30303 --server.host 127.0.0.1  --server.port 8545
+
 
 ganache-cli --account 0x77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad,100000000000000000000 0x2d7ebdb29614e40846274bcb7f3a591a53472d2107c2586886e1a7f72c38235a,100000000000000000000 0x532f5aad84ac90976760037798e1469df169e856e49c6b12893008d997bc2ea0,100000000000000000000 0xbb9c5f23fd14febf9a98fd00ccf6cc18ad93b0edc439e6ab5d3184ab5bcb3572,100000000000000000000  --db /data/tmp/ganache --account_keys_path /data/tmp/ganache-privatekey.json --chainId 30303
 
@@ -26,15 +27,27 @@ eth private_key - 只是测试网络随机生成，测试数据用，没有实�
 
 ```
 
-### 2. 工程初始化
+### 2. hardhat 工程初始化
 
 ```
-npm install -g truffle
 mkdir test
 cd test
-npm init -y
-truffle init
-npm install web3 solc@0.8.17 fs dotenv @openzeppelin/contracts @truffle/hdwallet-provider
+npm init --yes
+npm install ethers fs solc@0.8.17 dotenv @openzeppelin/contracts hardhat @nomicfoundation/hardhat-toolbox
+
+npx hardhat  # Create a JavaScript project
+
+
+npm install @nomicfoundation/hardhat-toolbox
+Add the highlighted line to your hardhat.config.js so that it looks like this:
+
+require("@nomicfoundation/hardhat-toolbox");
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.17",
+};
+
+
 
 编写代码
 vim xxx.sol
@@ -52,13 +65,15 @@ export ETH_PRIVATE_KEY=0x77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c
 # truffle 使用的 HDWalletProvider 接收的私钥要去除私钥前面的 0x 前缀
 export ETH_PRIVATE_KEY_RAW="77732d9f821695f3d4644e4b5f9d2528bf2a93c9a5b8733a6cdbb2c56f18c6ad"
 
-cd test
-编译
-truffle compile --all
-测试
-truffle test --network mynetwork
-部署
-truffle migrate --network mynetwork
+
+
+npx hardhat compile --force
+npx hardhat test --network myself
+npx hardhat run scripts/deploy.js --network myself
+
+如果不指定部署网络，会默认在 hardhat 内置网络内部署 (Hardhat Network)
+npx hardhat run scripts/deploy.js
+npx hardhat run scripts/deploy.js --network myself	// 指定网络
 
 
 
@@ -69,30 +84,27 @@ truffle migrate --network mynetwork
 
 
 
-truffle compile
-truffle compile --all  // 全部重新编译
-truffle migrate  // 没有指定网络，默认部署到内置的  development 网络
-truffle migrate --reset
-truffle migrate --network goerli
-truffle migrate --network mynetwork  --reset	// 强制重新部署
+
+npx hardhat	// 查看 task 列表
+npx hardhat help [task]  
+npx hardhat compile // 执行 compile task
+npx hardhat compile --force	// 强制重新编译
+npx hardhat test	// 批量运行测试脚本
+npx hardhat test test/SimpleToken.test.js	// 运行执行测试脚本
 
 
-运行测试用例
-truffle test
-truffle test --network mynetwork // 在指定网络测试
+npx hardhat run scripts/deploy.js --network <network-name>  // 部署
+npx hardhat run scripts/deploy.js --network myself	// 部署到指定网络
 
-运行 Solidity 测试用例:
-truffle test ./test/TestMetacoin.sol
-运行 JavaScript 测试用例
-truffle test ./test/metacoin.js
+hardhat 的控制台模式，实时与链上交互。默认会启动 hardhat 内置网络
+npx hardhat console
+npx hardhat console --network myself
 
 
-进入控制台
-truffle console
-truffle console  --network mynetwork
-
-进入dashboard
-truffle dashboard	// 默认 http://127.0.0.1:24012，默认开启了一个名字叫  dashboard 的网络，也可以在这个网络部署和运行合约.
+hardhat 提供了一个 console.log() 方法，可以在合约运行时打印日志，方便调试和测试。
+【此方法仅在 hardhat 内置网络中运行有效】
+在合约中引入 hardhat/console.sol 即可使用：
+import "hardhat/console.sol";
 ```
 
 ### 4. 感谢 Dapp-Learning 项目提供如此好的学习资料集合
