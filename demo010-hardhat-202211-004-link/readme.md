@@ -31,7 +31,7 @@ eth private_key - 只是测试网络随机生成，测试数据用，没有实�
 mkdir test
 cd test
 npm init --yes
-npm install ethers fs solc@0.8.17 dotenv @openzeppelin/contracts hardhat @nomicfoundation/hardhat-toolbox npm install @chainlink/contracts @nomiclabs/hardhat-web3 @nomiclabs/hardhat-waffle @nomiclabs/hardhat-truffle5 hardhat-deploy 
+npm install ethers fs solc@0.8.17 dotenv @openzeppelin/contracts hardhat @nomicfoundation/hardhat-toolbox @chainlink/contracts @nomiclabs/hardhat-web3 @nomiclabs/hardhat-waffle @nomiclabs/hardhat-truffle5 hardhat-deploy 
 
 npx hardhat  # Create a JavaScript project
 
