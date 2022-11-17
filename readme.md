@@ -1,14 +1,5 @@
-# Blockchain Dapp Demo
+# Blockchain demo
 
-**1. Solidity**
-
-**2. Web3.js**
-
-**3. Ether.js**
-
-**4. Truffle**
-
-**5. Hardhat**
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 
 ### 1. 安装启动 ganache

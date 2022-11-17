@@ -1,7 +1,7 @@
 {
-  "name": "demo005-ethersjs-erc20",
+  "name": "demo-ethersjs-202211",
   "version": "1.0.0",
-  "description": "### 1. 安装启动 ganache",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
