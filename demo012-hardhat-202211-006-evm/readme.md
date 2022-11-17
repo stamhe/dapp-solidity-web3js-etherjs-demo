@@ -15,7 +15,7 @@ await provider.getStorageAt(s1Addr, 0);
 第一个参数是部署的合约地址
 第二个参数是插槽的位置，这里注意，如果是十进制，就直接写数字. 如果是十六进制，需要加上引号，例如 '0x0'
 【固定长度数据类型】
-Storage004.sol 合约的 a,b,c变量分别是 string, string, mapping(uint256 => uint256) 类型的
+Storage004.sol 合约的 a,b,c变量分别是 string, string, mapping(uint256 => uint256), uint256[] 类型.
 string，bytes 这种非固定长度的类型，它们的存储规则是：
     1. 如果数据长度小于等于 31 字节， 则它存储在高位字节（左对齐），
         最低位字节存储 length * 2。即最后一个字节存储长度。
