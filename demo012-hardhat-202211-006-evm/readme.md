@@ -2,9 +2,12 @@
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 ### 0 文档说明
 ```
-
 Solidity EVM 内存布局
 https://mirror.xyz/xyyme.eth/5eu3_7f7275rqY-fNMUP5BKS8izV9Tshmv8Z5H9bsec
+
+
+使用单元测试
+npx hardhat test
 
 ```
 
@@ -49,9 +52,6 @@ https://hardhat.org/hardhat-network/docs/overview
 启动 fork 的节点(hardhat.config.js 配置好以后)
 npx hardhat node
 npx hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/<key>
-
-如果希望单元测试在本地 node 中执行，需要指定网络：
-npx hardhat test --network localhost
 
 
 
