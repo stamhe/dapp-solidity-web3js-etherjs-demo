@@ -1,4 +1,4 @@
-# hardhat - openzeppelin 透明代理可升级合约示例
+# hardhat - openzeppelin UUPS 可升级合约示例
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 
 ### 0 文档说明
@@ -12,7 +12,6 @@ https://www.frank.hk/blog/upgradable-smart-contract
 NFT 可升級智能合約 UUPS Proxy (Universal Upgradeable Proxy Standard)
 https://www.frank.hk/blog/upgradable-smart-contract-uups
 
-
 mkdir test
 cd test
 npm init --yes
@@ -24,21 +23,37 @@ npx hardhat  # Create a JavaScript project
 
 require('@openzeppelin/hardhat-upgrades');
 
+UUPS
+若要支持 UUPS 的升级模式，需要做以下几点改动：
+1. 逻辑合约需继承 UUPSUpgradeable 合约
+2. 覆写 _authorizeUpgrade 函数
+3. 部署脚本需要添加 kind: 'uups' 参数
+
+
 部署 - 部署信息永久写在 .openzeppelin/ 目录下面...
 npx hardhat run scripts/deploy.js --network myself
-可以观察到一共部署了三个合约，对应的部署顺序分别是
+
+观察到一共部署了两个合约，分别是：
 1. 逻辑合约
-2. ProxyAdmin 合约
-3. 代理合约（名为 TransparentUpgradeableProxy）
+2. 代理合约（名为 ERC1967Proxy）
 
 
 升级
 npx hardhat run scripts/deployV2.js --network myself
 npx hardhat run scripts/deployV3.js --network myself
 
+UUPS 升级步骤是：
+1. 部署新的逻辑合约
+2. 调用代理合约的 upgradeTo 函数进行升级，参数是新的逻辑合约地址
+我们可以看到，两种升级模式有所区别。TransparentProxy 模式在升级的时候，需要调用 ProxyAdmin 的升级函数。而 UUPS 模式在升级时，需要调用代理合约的升级函数。后者相比于前者少部署一个合约。
+
+
 测试
 npx hardhat test --network myself
 
+
+
+npx hardhat verify --network kovan <<PROXY_CONTRACT_ADDRESS>>
 
 ```
 
