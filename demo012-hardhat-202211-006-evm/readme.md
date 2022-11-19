@@ -2,13 +2,13 @@
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 ### 0 文档说明
 ```
+
 apt-get install software-properties-common
 add-apt-repository -y ppa:ethereum/ethereum
 apt-get update
-apt-get install ethereum
+apt-get install solc geth evm swarm bootnode rlpdump abigen
 
-获取 geth,evm,swarm,bootnode,rlpdump,abigen 等命令行工具
-npm install -g solc 安装 solc 编译器.
+获取 solc, geth,evm,swarm,bootnode,rlpdump,abigen 等命令行工具
 
 Solidity EVM 状态变量内存布局
 https://mirror.xyz/xyyme.eth/5eu3_7f7275rqY-fNMUP5BKS8izV9Tshmv8Z5H9bsec
