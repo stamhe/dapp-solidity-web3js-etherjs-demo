@@ -1,4 +1,4 @@
-# EVM - 内存布局
+# EVM - opcode 工作流
 ## solidity 基于 0.8.0 以上，solc 使用最新的 0.8.17
 ### 0 文档说明
 ```
@@ -28,6 +28,19 @@ https://mirror.xyz/xyyme.eth/dsU7KoQLyqiHrY0bQX2ETq1zkDYiW-3PtzxfzGwRdss
 理解 EVM - 探究Solidity 背后的秘密
 https://learnblockchain.cn/column/22
 
+
+EVM Deep Dives: The Path to Shadowy Super Coder - 系列,英文,一共 6 篇.
+https://noxx.substack.com/archive
+
+evm 移植
+https://github.com/stamhe/tendermint_code_analysis/tree/master/evm%E7%A7%BB%E6%A4%8D
+
+
+pyevmasm
+https://github.com/crytic/pyevmasm
+
+py-evm 官方支持的 python 实现的 evm
+https://github.com/ethereum/py-evm
 
 
 
