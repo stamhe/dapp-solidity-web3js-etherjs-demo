@@ -1,0 +1,21 @@
+{
+  "name": "demo-hardhat-multisig-wallet-001",
+  "version": "1.0.0",
+  "description": "``` 多签合约 https://github.com/AmazingAng/WTF-Solidity/blob/main/50_MultisigWallet/readme.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@openzeppelin/contracts": "^4.8.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "fs": "^0.0.1-security",
+    "hardhat": "^2.12.2",
+    "solc": "^0.8.17"
+  }
+}
